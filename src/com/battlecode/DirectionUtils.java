@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class DirectionUtils {
 
-    private static final List<Direction> DIRECTIONS = new ArrayList<>;
+    private static final List<Direction> DIRECTIONS = new ArrayList<>();
     private static final Random random = new Random(1234);
 
     static {
