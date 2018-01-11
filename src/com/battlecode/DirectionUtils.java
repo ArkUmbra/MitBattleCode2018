@@ -3,6 +3,7 @@ package com.battlecode;
 import bc.Direction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -12,10 +13,7 @@ public class DirectionUtils {
     private static final Random random = new Random(1234);
 
     static {
-        for (Direction dir : Direction.values()) {
-            DIRECTIONS.add(dir);
-        }
-
+        DIRECTIONS.addAll(Arrays.asList(Direction.values()));
     }
 
     public static Direction randomDir() {
