@@ -6,6 +6,8 @@ import bc.VecUnit;
 
 public class Player {
 
+    private MovementController movementController = new MovementController();
+
     public static void main(String... args) {
         new Player().startMatch();
     }
@@ -25,15 +27,14 @@ public class Player {
     }
 
     private void doTurn(GameController gc) {
-        // do stuff
-        // do stuff
-
         // Seems like VecUnit is not iterable so we can't use a proper for loop (groan)
         VecUnit myUnits = gc.myUnits();
 
         for (int i = 0; i < myUnits.size(); i++) {
             Unit unit = myUnits.get(i);
             gc.moveRobot(unit.id(), DirectionUtils.randomDir());
+
+            //movementController.moveTowardDestination(gc, unit);
         }
 
         // Indicate we've finished out turn
