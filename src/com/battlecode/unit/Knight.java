@@ -1,4 +1,12 @@
 package com.battlecode.unit;
 
-public class Knight {
+import bc.GameController;
+import bc.Unit;
+
+public class Knight extends BaseUnit {
+
+    @Override
+    public void doTurn(GameController gc, Unit unit) {
+
+    }
 }

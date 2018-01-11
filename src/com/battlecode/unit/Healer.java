@@ -1,4 +1,12 @@
 package com.battlecode.unit;
 
-public class Healer {
+import bc.GameController;
+import bc.Unit;
+
+public class Healer extends BaseUnit {
+
+    @Override
+    public void doTurn(GameController gc, Unit unit) {
+
+    }
 }

@@ -2,11 +2,17 @@ package com.battlecode;
 
 import bc.GameController;
 import bc.Unit;
+import bc.UnitType;
 import bc.VecUnit;
+import com.battlecode.unit.*;
 
 public class Player {
 
-    private MovementController movementController = new MovementController();
+    private static final Worker worker = new Worker();
+    private static final Knight knight = new Knight();
+    private static final Ranger ranger = new Ranger();
+    private static final Mage mage = new Mage();
+    private static final Healer healer = new Healer();
 
     public static void main(String... args) {
         new Player().startMatch();
@@ -34,10 +40,26 @@ public class Player {
             Unit unit = myUnits.get(i);
             gc.moveRobot(unit.id(), DirectionUtils.randomDir());
 
-            //movementController.moveTowardDestination(gc, unit);
+            convertToUnitTemplate(unit).doTurn(gc, unit);
         }
 
         // Indicate we've finished out turn
         gc.nextTurn();
     }
+
+    private BaseUnit convertToUnitTemplate(Unit unit) {
+        UnitType unitType = unit.unitType();
+
+        switch (unitType) {
+            case Worker: return worker;
+            case Knight: return knight;
+            case Ranger: return ranger;
+            case Mage: return mage;
+            case Healer: return healer;
+
+            default: throw new RuntimeException("Unit type not implemented " + unitType);
+        }
+
+    }
+    
 }
