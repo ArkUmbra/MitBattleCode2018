@@ -1,6 +1,8 @@
 package com.battlecode;
 
 import bc.GameController;
+import bc.Unit;
+import bc.VecUnit;
 
 public class Player {
 
@@ -25,6 +27,14 @@ public class Player {
     private void doTurn(GameController gc) {
         // do stuff
         // do stuff
+
+        // Seems like VecUnit is not iterable so we can't use a proper for loop (groan)
+        VecUnit myUnits = gc.myUnits();
+
+        for (int i; i < myUnits.size(); i++) {
+            Unit unit = myUnits.get(i);
+            gc.moveRobot(unit.id(), DirectionUtils.randomDir());
+        }
 
         // Indicate we've finished out turn
         gc.nextTurn();
