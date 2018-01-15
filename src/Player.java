@@ -36,7 +36,6 @@ public class Player {
 
         for (int i = 0; i < myUnits.size(); i++) {
             Unit unit = myUnits.get(i);
-            gc.moveRobot(unit.id(), DirectionUtils.randomDir());
 
             convertToUnitTemplate(unit).doTurn(gc, unit);
         }

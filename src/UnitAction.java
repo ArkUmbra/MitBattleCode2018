@@ -1,0 +1,4 @@
+public enum UnitAction {
+
+    ROAMING, MOVING_TOWARDS_ORE, BUILDING_FACTORY, MINING
+}
