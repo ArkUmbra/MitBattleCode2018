@@ -1,15 +1,17 @@
-package com.battlecode.unit;
 
 import bc.GameController;
-import bc.Location;
+import bc.MapLocation;
 import bc.Unit;
 
 public class Worker extends BaseUnit {
 
     @Override
     public void doTurn(GameController gc, Unit unit) {
+
+        gc.moveRobot(unit.id(), DirectionUtils.randomDir());
+
         // TODO
-        Location destination = null;
+        MapLocation destination = null;
 
         movementController.moveTowardDestination(gc, unit, destination);
     }

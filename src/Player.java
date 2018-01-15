@@ -1,10 +1,8 @@
-package com.battlecode;
 
 import bc.GameController;
 import bc.Unit;
 import bc.UnitType;
 import bc.VecUnit;
-import com.battlecode.unit.*;
 
 public class Player {
 
@@ -61,5 +59,5 @@ public class Player {
         }
 
     }
-    
+
 }

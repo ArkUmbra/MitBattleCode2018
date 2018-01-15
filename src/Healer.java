@@ -1,9 +1,8 @@
-package com.battlecode.unit;
 
 import bc.GameController;
 import bc.Unit;
 
-public class Ranger extends BaseUnit {
+public class Healer extends BaseUnit {
 
     @Override
     public void doTurn(GameController gc, Unit unit) {

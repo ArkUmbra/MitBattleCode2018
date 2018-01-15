@@ -1,8 +1,7 @@
-package com.battlecode.unit;
+
 
 import bc.GameController;
 import bc.Unit;
-import com.battlecode.MovementController;
 
 public abstract class BaseUnit {
 

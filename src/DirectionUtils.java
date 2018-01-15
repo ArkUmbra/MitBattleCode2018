@@ -1,5 +1,3 @@
-package com.battlecode;
-
 import bc.Direction;
 
 import java.util.ArrayList;
