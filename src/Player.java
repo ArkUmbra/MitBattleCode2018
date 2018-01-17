@@ -11,6 +11,7 @@ public class Player {
     private static final Ranger ranger = new Ranger();
     private static final Mage mage = new Mage();
     private static final Healer healer = new Healer();
+    private static final Factory factory = new Factory();
 
     public static void main(String... args) {
         new Player().startMatch();
@@ -53,6 +54,7 @@ public class Player {
             case Ranger: return ranger;
             case Mage: return mage;
             case Healer: return healer;
+            case Factory: return factory;
 
             default: throw new RuntimeException("Unit type not implemented " + unitType);
         }

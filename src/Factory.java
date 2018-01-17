@@ -1,4 +1,10 @@
+import bc.GameController;
+import bc.Unit;
 
+public class Factory extends BaseUnit {
 
-public class Factory {
+    @Override
+    public void doTurn(GameController gc, Unit unit) {
+
+    }
 }

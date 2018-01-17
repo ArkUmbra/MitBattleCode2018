@@ -12,24 +12,31 @@ public class Worker extends BaseUnit {
     @Override
     public void doTurn(GameController gc, Unit unit) {
 
-        UnitState unitState = WORKER_STATES.get(unit.id());
+        int unitId = unit.id();
+        UnitState unitState = WORKER_STATES.get(unitId);
         if (unitState == null) {
             unitState = createNewRandomUnitState(gc, unit);
-            WORKER_STATES.put(unit.id(), unitState);
+            WORKER_STATES.put(unitId, unitState);
         }
+        MapLocation actionLocation = unitState.getActionLocation();
         switch (unitState.getUnitAction()) {
             case ROAMING:
-                movementController.moveTowardDestination(gc, unit, unitState.getActionLocation());
-                if (unit.location().mapLocation().distanceSquaredTo(unitState.getActionLocation()) == 0) {
-                    WORKER_STATES.remove(unit.id());
+                movementController.moveTowardDestination(gc, unit, actionLocation);
+                if (unit.location().mapLocation().distanceSquaredTo(actionLocation) == 0) {
+                    WORKER_STATES.remove(unitId);
+                    doTurn(gc, unit);
                 } else {
-                    WORKER_STATES.put(unit.id(), unitState);
+                    WORKER_STATES.put(unitId, unitState);
                 }
                 break;
             case BUILDING_FACTORY:
-                if (gc.canBuild(unit.id(), UnitType.Factory.swigValue())) {
-                    gc.build(unit.id(), UnitType.Factory.swigValue());
-                    WORKER_STATES.put(unit.id(), unitState);
+                if (gc.hasUnitAtLocation(actionLocation) &&
+                        gc.canBuild(unitId, gc.senseUnitAtLocation(actionLocation).id())) {
+                    gc.build(unitId, gc.senseUnitAtLocation(actionLocation).id());
+                } else {
+                    //Cannot build. Either finished building, or no unit there anymore.
+                    WORKER_STATES.remove(unitId);
+                    doTurn(gc, unit);
                 }
                 break;
             default:
@@ -49,8 +56,11 @@ public class Worker extends BaseUnit {
                 if (gameController.canBlueprint(unit.id(), UnitType.Factory, direction)) {
                     gameController.blueprint(unit.id(), UnitType.Factory, direction);
                     unitState = UnitState.buildingState(unit.location().mapLocation().add(direction));
-                    break;
+
+                } else {
+                    unitState = createNewRandomUnitState(gameController, unit);
                 }
+                break;
             default:
                 unitState = buildRoamingState(gameController);
                 break;
